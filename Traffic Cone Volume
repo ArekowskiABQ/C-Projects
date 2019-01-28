@@ -1,0 +1,88 @@
+/*
+Arthur Rekowski
+Arekowski@cnm.edu
+Traffic Cone Volume Finder
+*/
+
+#include <iostream>
+//#include <math.h>
+
+using namespace std;
+
+int main() {
+
+	// # of Cones Customer Wants
+	int conesForClient = 1;
+
+	// intro
+	cout << "Arthur Rekowski" << endl;
+	cout << "Traffic Cone Plastic Calculator" << endl;
+	cout << endl;
+	cout << "How many cones would you like?" << endl;
+	cin >> conesForClient;
+	cin.ignore();
+	cout << endl;
+
+	// Base Measurements
+	// Length = 16
+	// Width = 16
+	// Height = 1
+	// Cone Measurements 
+	// Height = 28
+	// Radius = 6
+
+	//pi
+	const double pi = 3.141592653589793;
+
+	// find volume of base
+	const double base = 16.0;
+	double baseSquared = base * base;
+	const double baseHeight = 1.0;
+	double baseVolume = baseSquared * baseHeight;
+
+	// find volume of cone
+	double coneRadius = 6.0;
+	double coneRadiusSquared = coneRadius * coneRadius;
+	double coneHeight = 28.0;
+	double coneVolume = pi * coneRadiusSquared * (coneHeight / 3.0);
+
+	// find volume of smaller cone
+	double smallerConeRadius = coneRadius - 1.0;
+	double smallerConeRadiusSquared = smallerConeRadius * smallerConeRadius;
+	double smallerConeHeight = coneHeight - 1.0;
+	double smallerConeVolume = pi * smallerConeRadiusSquared * (smallerConeHeight / 3.0);
+
+    // find difference between cone volumes
+	double coneVolumeDiff = coneVolume - smallerConeVolume;
+
+	// find total volume of base and hollow cone 
+	double totalVolume = baseVolume + coneVolumeDiff;
+	double allVolume = totalVolume * conesForClient;
+	double cubicInchesToGallons = allVolume / 231;
+	int gallonRoundUp = static_cast <int>(ceil(cubicInchesToGallons));
+	
+	// presicion 
+	cout.setf(ios::fixed | ios::showpoint);
+	cout.precision(2);
+
+	// display calculations 
+	cout << "Cone base side length : 16" << " inches" << endl;
+	cout << "Cone base height : 1" << " inches" << endl;
+	cout << "Cone base volume : " << baseVolume << " cubic inches" << endl;
+	cout << "Cone height : 28" << " inches" << endl;
+	cout << "Cone radius : 6" << " inches" << endl;
+	cout << "Cone volume : " << coneVolume << " cubic inches" << endl;
+	cout << "Inner cone volume : " <<  smallerConeVolume << " cubic inches" << endl;
+	cout << "Volume of cone walls : " <<  coneVolumeDiff << " cubic inches" << endl;
+	cout << "Volume of one cone : " << totalVolume << " cubic inches" << endl;
+	cout << "Volume of all cones : " << allVolume << " cubic inches" << endl;
+	cout << "Volume of plastic needed in gallons (decimal) : " << cubicInchesToGallons << " gallons" << endl;
+	cout << "Volume of plastic needed in gallons (integer) : " << (gallonRoundUp) << " gallons" << endl;
+
+	// outro
+	cout << " " << endl;
+	cout << "Thanks you!" << endl;
+
+	cin.get();
+	return 0;
+}
